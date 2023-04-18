@@ -1,4 +1,4 @@
-# NLP---Project
+# Natural Language Processing-Project
 
 In this project, we are using the spaCy library, which is an open-source Python library used for natural language processing (NLP). The aim is to analyze the text from student answered prompts, which may contain a large amount of unstructured data. We use spaCy to parse and analyze the text, identifying the important information and extracting it for further processing.
 

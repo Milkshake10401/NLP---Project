@@ -15,7 +15,9 @@ packaging==23.1
 pandas==2.0.1
 pathy==0.10.1
 preshed==3.0.8
+py4j==0.10.9.7
 pydantic==1.10.7
+pyspark==3.4.0
 python-dateutil==2.8.2
 pytz==2023.3
 requests==2.29.0

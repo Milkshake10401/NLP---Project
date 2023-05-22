@@ -1,36 +1,56 @@
 import pandas as pd
-import spacy 
+import spacy
+from spacy import displacy
+
 
 def csv_column_one(df):
-    for item in df.iloc[:, 0]:
-        data_type = type(item)
+    nlp = spacy.load("en_core_web_sm")
+    root_list = []
 
-    return print(data_type)
+    for item in df.iloc[:, 0]:
+        str_item = str(item)
+        doc = nlp(str_item)
+
+        for token in doc:
+            if token.dep_ == 'ROOT':
+                root_list.append(token.text)
 
 
 def csv_column_two(df):
-    for item in df.iloc[:, 1]:
-        # Do something with the item in the first column
-        print(item)
+    nlp = spacy.load("en_core_web_sm")
+    root_list = []
 
-    return
+    for item in df.iloc[:, 1]:
+        str_item = str(item)
+        doc = nlp(str_item)
+
+        for token in doc:
+            if token.dep_ == 'ROOT':
+                root_list.append(token.text)
+
+    return print(root_list)
 
 
 def csv_column_three(df):
-    for item in df.iloc[:, 2]:
-        # Do something with the item in the third column
-        print(item)
+    nlp = spacy.load("en_core_web_sm")
+    root_list = []
 
-    return
+    for item in df.iloc[:, 0]:
+        str_item = str(item)
+        doc = nlp(str_item)
+
+        for token in doc:
+            if token.dep_ == 'ROOT':
+                root_list.append(token.text)
+
+    return print(root_list)
 
 
 def main():
-    # Reading the csv file
     df = pd.read_csv('10-Reflection Survey Student Analysis Report.csv')
-    # Replacing the blank spaces after sentence
     df = df.replace('\xa0', '', regex=True)
-    csv_column_one(df)
 
+    csv_column_one(df)
     return 0
 
 

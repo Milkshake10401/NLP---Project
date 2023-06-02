@@ -116,16 +116,23 @@ def csv_column_three(df):
 
 
 def main():
-    df = pd.read_csv('10-Reflection Survey Student Analysis Report.csv')
+    csv_file = input("Enter the path of the CSV file: ")
+
+    try:
+        df = pd.read_csv(csv_file)
+    except FileNotFoundError:
+        print("File not found. Please enter a valid path.")
+        return
+
     df = df.replace('\xa0', '', regex=True)
 
     while True:
 
-        print("Which column do you want to process?")
+        print("\n\nWhich column do you want to process?")
         print("1. First Column")
         print("2. Second Column")
         print("3. Third Column")
-        print("0. Exit")
+        print("0. Exit\n\n")
 
         choice = input("Enter your choice (1, 2, 3, or 0 to exit): ")
 

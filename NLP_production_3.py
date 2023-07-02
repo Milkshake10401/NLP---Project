@@ -17,27 +17,29 @@ def spell_check(text):
     return corrected_text
 
 
+def remove_stop_words(text):
+    nlp = spacy.load("en_core_web_sm")
+    doc = nlp(text)
+    filtered_words = [token.text for token in doc if not token.is_stop]
+    filtered_text = ' '.join(filtered_words)
+    return filtered_text
+
+
 def process_column(df, column_index):
     nlp = spacy.load("en_core_web_sm")
     root_list = []
-
     column_name = df.columns[column_index]
-
     df = remove_nan_values(df, column_name)
 
     for item in df.iloc[:, column_index]:
         str_item = str(item)
         corrected_str_item = spell_check(str_item)
-        lower_str_item = corrected_str_item.lower()
+        filtered_str_item = remove_stop_words(corrected_str_item)
+        lower_str_item = filtered_str_item.lower()
         doc = nlp(lower_str_item)
 
         for token in doc:
             if token.dep_ == 'ROOT' and token.lemma_ != 'nan':
-                # Additional functionality using Spacy
-                children = [child for child in token.children]
-                noun_check = any(child.pos_ == 'NOUN' for child in token.children)
-                # Do something with children and noun_check
-
                 root_list.append(token.lemma_)
 
     word_freq = Counter(root_list)
